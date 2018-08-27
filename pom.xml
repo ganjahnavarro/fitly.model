@@ -3,12 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gnjb.fitly</groupId>
 	<artifactId>fitly.model</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 
 	<properties>
 		<springframework.version>4.2.4.RELEASE</springframework.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
-		<org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
 		<core.version>0.0.1</core.version>
 	</properties>
 
@@ -19,7 +18,7 @@
 			<artifactId>core.base</artifactId>
 			<version>${core.version}</version>
 		</dependency>
-	
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
