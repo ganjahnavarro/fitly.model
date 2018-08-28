@@ -1,6 +1,8 @@
-package com.gnjb.fitly.model;
+package com.gnjb.fitly.model.member;
 
 import javax.persistence.Entity;
+
+import com.gnjb.fitly.model.person.Person;
 
 @Entity(name = Member.ENTITY_NAME)
 public class Member extends Person {

@@ -1,4 +1,4 @@
-package com.gnjb.fitly.model;
+package com.gnjb.fitly.model.session;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import com.gnjb.fitly.model.coach.Coach;
+import com.gnjb.fitly.model.product.ProductAvailment;
 
 import core.Utility;
 import core.model.Record;
@@ -22,7 +26,7 @@ public class Session extends Record {
 
 	private Coach coach;
 	private Date date;
-	private List<Member> members;
+	private List<ProductAvailment> productAvailments;
 
 	@NotNull(message = "Coach is required.")
 	@ManyToOne(targetEntity = Coach.class)
@@ -43,16 +47,17 @@ public class Session extends Record {
 		this.date = date;
 	}
 
-	@OneToMany(targetEntity = Member.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "session", orphanRemoval = true)
-	public List<Member> getMembers() {
-		return members;
+	@OneToMany(targetEntity = ProductAvailment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "session", orphanRemoval = true)
+	public List<ProductAvailment> getProductAvailments() {
+		return productAvailments;
 	}
 
-	public void setMembers(List<Member> members) {
-		this.members = members;
+	public void setProductAvailments(List<ProductAvailment> productAvailments) {
+		this.productAvailments = productAvailments;
 	}
 
 	@Override
+	@Transient
 	public String getDisplayString() {
 		return "Session: " + Utility.formatDate(getDate());
 	}

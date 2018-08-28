@@ -1,4 +1,4 @@
-package com.gnjb.fitly.model;
+package com.gnjb.fitly.model.person;
 
 import java.util.Date;
 

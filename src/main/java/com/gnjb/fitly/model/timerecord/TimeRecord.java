@@ -1,19 +1,22 @@
-package com.gnjb.fitly.model;
+package com.gnjb.fitly.model.timerecord;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+
+import com.gnjb.fitly.model.person.Person;
 
 import core.model.Record;
 
-@Entity(name = Entry.ENTITY_NAME)
-public class Entry extends Record {
+@Entity(name = TimeRecord.ENTITY_NAME)
+public class TimeRecord extends Record {
 
 	private static final long serialVersionUID = -1300378615181102711L;
-	public static final String ENTITY_NAME = "entry";
+	public static final String ENTITY_NAME = "timeRecord";
 
 	private Person person;
 	private Date date;
@@ -38,6 +41,7 @@ public class Entry extends Record {
 	}
 
 	@Override
+	@Transient
 	public String getDisplayString() {
 		return String.valueOf(getDate());
 	}

@@ -1,4 +1,4 @@
-package com.gnjb.fitly.model;
+package com.gnjb.fitly.model.member;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import core.Utility;
@@ -61,6 +62,7 @@ public class Membership extends Record {
 	}
 
 	@Override
+	@Transient
 	public String getDisplayString() {
 		return "Membership from " + Utility.formatDate(getStartDate()) + " to " + Utility.formatDate(getEndDate());
 	}
