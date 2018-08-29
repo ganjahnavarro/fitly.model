@@ -23,7 +23,7 @@ public class Membership extends Record {
 	private Date endDate;
 	private BigDecimal amount;
 
-	@NotNull(message = "Member is required.")
+	@NotNull(message = "Member is required")
 	@ManyToOne(targetEntity = Member.class)
 	@JoinColumn(name = "memberId")
 	public Member getMember() {
@@ -34,7 +34,7 @@ public class Membership extends Record {
 		this.member = member;
 	}
 
-	@NotNull(message = "Start date is required.")
+	@NotNull(message = "Start date is required")
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -43,7 +43,7 @@ public class Membership extends Record {
 		this.startDate = startDate;
 	}
 
-	@NotNull(message = "End date is required.")
+	@NotNull(message = "End date is required")
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -52,7 +52,7 @@ public class Membership extends Record {
 		this.endDate = endDate;
 	}
 
-	@NotNull(message = "Amount is required.")
+	@NotNull(message = "Amount is required")
 	public BigDecimal getAmount() {
 		return amount;
 	}

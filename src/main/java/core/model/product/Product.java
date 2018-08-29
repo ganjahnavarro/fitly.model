@@ -15,7 +15,7 @@ public abstract class Product extends Record {
 	private String name;
 	private String description;
 
-	@NotBlank(message = "Name is required.")
+	@NotBlank(message = "Name is required")
 	public String getName() {
 		return name;
 	}

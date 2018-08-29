@@ -21,7 +21,8 @@ public class ProgramRepository extends AbstractRepository<Program> {
 		if (filter != null && !filter.isEmpty()) {
 			criteria.add(Restrictions.ilike("name", filter, MatchMode.START));
 		}
-		return criteria.list();
+		List<Program> list = criteria.list();
+		return list;
 	}
 
 	@Override

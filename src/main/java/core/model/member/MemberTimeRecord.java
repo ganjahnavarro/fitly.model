@@ -19,7 +19,7 @@ public class MemberTimeRecord extends Record {
 	private Member member;
 	private Date date;
 
-	@NotNull(message = "Member is required.")
+	@NotNull(message = "Member is required")
 	@ManyToOne(targetEntity = Member.class)
 	@JoinColumn(name = "memberId")
 	public Member getMember() {

@@ -3,6 +3,7 @@ package core.model.product;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = Program.ENTITY_NAME)
 public class Program extends Product {
@@ -19,6 +20,7 @@ public class Program extends Product {
 
 	private Boolean active = true;
 
+	@NotNull(message = "Guest price is required")
 	public BigDecimal getGuestPrice() {
 		return guestPrice;
 	}
@@ -27,6 +29,7 @@ public class Program extends Product {
 		this.guestPrice = guestPrice;
 	}
 
+	@NotNull(message = "Member price is required")
 	public BigDecimal getMemberPrice() {
 		return memberPrice;
 	}

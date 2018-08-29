@@ -25,7 +25,7 @@ public class Session extends Record {
 	private Date date;
 	private List<ProductAvailment> productAvailments;
 
-	@NotNull(message = "Coach is required.")
+	@NotNull(message = "Coach is required")
 	@ManyToOne(targetEntity = Coach.class)
 	@JoinColumn(name = "coachId")
 	public Coach getCoach() {

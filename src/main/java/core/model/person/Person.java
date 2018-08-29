@@ -35,7 +35,7 @@ public abstract class Person extends Record {
 	private byte[] image;
 	private String imageFileName;
 	
-	@NotEmpty(message = "First name is required.")
+	@NotEmpty(message = "First name is required")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -52,7 +52,7 @@ public abstract class Person extends Record {
 		this.middleName = middleName;
 	}
 
-	@NotEmpty(message = "Last name is required.")
+	@NotEmpty(message = "Last name is required")
 	public String getLastName() {
 		return lastName;
 	}
@@ -61,7 +61,7 @@ public abstract class Person extends Record {
 		this.lastName = lastName;
 	}
 
-	@NotNull(message = "Gender is required.")
+	@NotNull(message = "Gender is required")
 	@Enumerated(EnumType.STRING)
 	public Gender getGender() {
 		return gender;

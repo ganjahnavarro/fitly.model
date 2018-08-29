@@ -19,7 +19,7 @@ public class CoachTimeRecord extends Record {
 	private Coach coach;
 	private Date date;
 
-	@NotNull(message = "Coach is required.")
+	@NotNull(message = "Coach is required")
 	@ManyToOne(targetEntity = Coach.class)
 	@JoinColumn(name = "coachId")
 	public Coach getCoach() {

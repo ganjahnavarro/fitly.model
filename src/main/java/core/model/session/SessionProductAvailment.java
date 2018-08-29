@@ -30,7 +30,7 @@ public class SessionProductAvailment implements Serializable {
 		this.id = id;
 	}
 
-	@NotNull(message = "Session is required.")
+	@NotNull(message = "Session is required")
 	@ManyToOne(targetEntity = Session.class)
 	@JoinColumn(name = "sessionId")
 	public Session getSession() {
@@ -41,7 +41,7 @@ public class SessionProductAvailment implements Serializable {
 		this.session = session;
 	}
 
-	@NotNull(message = "Product availment is required.")
+	@NotNull(message = "Product availment is required")
 	@ManyToOne(targetEntity = ProductAvailment.class)
 	@JoinColumn(name = "productAvailmentId")
 	public ProductAvailment getProductAvailment() {

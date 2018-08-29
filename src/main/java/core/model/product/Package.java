@@ -21,7 +21,7 @@ public class Package extends Product {
 	private BigDecimal price;
 
 	@Enumerated(EnumType.STRING)
-	@NotNull(message = "Duration is required.")
+	@NotNull(message = "Duration is required")
 	public Duration getDuration() {
 		return duration;
 	}
@@ -30,7 +30,7 @@ public class Package extends Product {
 		this.duration = duration;
 	}
 
-	@NotNull(message = "Duration count is required.")
+	@NotNull(message = "Duration count is required")
 	public Integer getDurationCount() {
 		return durationCount;
 	}
@@ -39,7 +39,7 @@ public class Package extends Product {
 		this.durationCount = durationCount;
 	}
 
-	@NotNull(message = "Number of sessions is required.")
+	@NotNull(message = "Number of sessions is required")
 	public Integer getSessionsCount() {
 		return sessionsCount;
 	}
@@ -48,7 +48,7 @@ public class Package extends Product {
 		this.sessionsCount = sessionsCount;
 	}
 
-	@NotNull(message = "Price is required.")
+	@NotNull(message = "Price is required")
 	public BigDecimal getPrice() {
 		return price;
 	}
