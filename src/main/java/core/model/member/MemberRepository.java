@@ -24,6 +24,12 @@ public class MemberRepository extends AbstractRepository<Member> {
 		List<Member> list = criteria.list();
 		return list;
 	}
+	
+	public Membership findMembershipByMemberId(Long memberId) {
+		Criteria criteria = getSession().createCriteria(Membership.class);
+		criteria.add(Restrictions.eq("member.id", memberId));
+		return (Membership) criteria.uniqueResult();
+	}
 
 	@Override
 	protected String getEntityName() {

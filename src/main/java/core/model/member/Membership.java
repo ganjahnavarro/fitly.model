@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -19,12 +19,15 @@ public class Membership extends Record {
 	public static final String ENTITY_NAME = "membership";
 
 	private Member member;
+
 	private Date startDate;
 	private Date endDate;
+
+	private String accessCardNo;
 	private BigDecimal amount;
 
 	@NotNull(message = "Member is required")
-	@ManyToOne(targetEntity = Member.class)
+	@OneToOne(targetEntity = Member.class)
 	@JoinColumn(name = "memberId")
 	public Member getMember() {
 		return member;
@@ -52,6 +55,14 @@ public class Membership extends Record {
 		this.endDate = endDate;
 	}
 
+	public String getAccessCardNo() {
+		return accessCardNo;
+	}
+
+	public void setAccessCardNo(String accessCardNo) {
+		this.accessCardNo = accessCardNo;
+	}
+
 	@NotNull(message = "Amount is required")
 	public BigDecimal getAmount() {
 		return amount;
@@ -64,7 +75,8 @@ public class Membership extends Record {
 	@Override
 	@Transient
 	public String getDisplayString() {
-		return "Membership from " + Utility.formatDate(getStartDate()) + " to " + Utility.formatDate(getEndDate());
+		return "Membership from " + Utility.formatDate(getStartDate()) + " to "
+				+ Utility.formatDate(getEndDate());
 	}
 
 }
