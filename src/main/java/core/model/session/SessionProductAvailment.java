@@ -1,22 +1,34 @@
-package com.gnjb.fitly.model.session;
+package core.model.session;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import com.gnjb.fitly.model.product.ProductAvailment;
+import core.model.product.ProductAvailment;
 
-@Entity(name = SessionProductAvailment.ENTITY_NAME)
 public class SessionProductAvailment implements Serializable {
 
 	private static final long serialVersionUID = 6652886892737589638L;
 	public static final String ENTITY_NAME = "sessionProductAvailment";
 
+	private Long id;
 	private Session session;
 	private ProductAvailment productAvailment;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	@NotNull(message = "Session is required.")
 	@ManyToOne(targetEntity = Session.class)

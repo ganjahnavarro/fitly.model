@@ -1,10 +1,9 @@
-package com.gnjb.fitly.model.session;
+package core.model.session;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,13 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import com.gnjb.fitly.model.coach.Coach;
-import com.gnjb.fitly.model.product.ProductAvailment;
-
 import core.Utility;
 import core.model.Record;
+import core.model.coach.Coach;
+import core.model.product.ProductAvailment;
 
-@Entity(name = Session.ENTITY_NAME)
 public class Session extends Record {
 
 	private static final long serialVersionUID = 4240562372196169717L;

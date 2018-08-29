@@ -1,1 +1,1 @@
-# com.gnjb.fitly.model
+# core.model

@@ -1,14 +1,12 @@
-package com.gnjb.fitly.model.person;
+package core.model.person;
 
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Lob;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -18,8 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import core.enums.Gender;
 import core.model.Record;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class Person extends Record {
 
 	private static final long serialVersionUID = -8375457349889809821L;

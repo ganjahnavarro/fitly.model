@@ -1,4 +1,4 @@
-package com.gnjb.fitly.model.timerecord;
+package core.model.member;
 
 import java.util.Date;
 
@@ -8,28 +8,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import com.gnjb.fitly.model.person.Person;
-
 import core.model.Record;
 
-@Entity(name = TimeRecord.ENTITY_NAME)
-public class TimeRecord extends Record {
+@Entity(name = MemberTimeRecord.ENTITY_NAME)
+public class MemberTimeRecord extends Record {
 
 	private static final long serialVersionUID = -1300378615181102711L;
-	public static final String ENTITY_NAME = "timeRecord";
+	public static final String ENTITY_NAME = "memberTimeRecord";
 
-	private Person person;
+	private Member member;
 	private Date date;
 
-	@NotNull(message = "Person is required.")
-	@ManyToOne(targetEntity = Person.class)
-	@JoinColumn(name = "personId")
-	public Person getPerson() {
-		return person;
+	@NotNull(message = "Member is required.")
+	@ManyToOne(targetEntity = Member.class)
+	@JoinColumn(name = "memberId")
+	public Member getMember() {
+		return member;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setMember(Member member) {
+		this.member = member;
 	}
 
 	public Date getDate() {

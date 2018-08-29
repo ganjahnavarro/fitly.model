@@ -1,4 +1,4 @@
-package com.gnjb.fitly.model.product;
+package core.model.product;
 
 import java.math.BigDecimal;
 

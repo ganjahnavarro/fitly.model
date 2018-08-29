@@ -1,16 +1,13 @@
-package com.gnjb.fitly.model.product;
+package core.model.product;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 import core.model.Record;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class Product extends Record {
 
 	private static final long serialVersionUID = 5703232675108766534L;

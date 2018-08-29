@@ -1,4 +1,4 @@
-package com.gnjb.fitly.model.product;
+package core.model.product;
 
 import java.math.BigDecimal;
 
@@ -7,7 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
-import com.gnjb.fitly.enums.Duration;
+import core.enums.Duration;
 
 @Entity(name = Package.ENTITY_NAME)
 public class Package extends Product {

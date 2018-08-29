@@ -1,4 +1,4 @@
-package com.gnjb.fitly.enums;
+package core.enums;
 
 public enum Duration {
 
