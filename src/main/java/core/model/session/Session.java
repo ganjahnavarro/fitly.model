@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,8 +15,8 @@ import javax.validation.constraints.NotNull;
 import core.Utility;
 import core.model.Record;
 import core.model.coach.Coach;
-import core.model.product.ProductAvailment;
 
+@Entity(name = Session.ENTITY_NAME)
 public class Session extends Record {
 
 	private static final long serialVersionUID = 4240562372196169717L;
@@ -23,7 +24,9 @@ public class Session extends Record {
 
 	private Coach coach;
 	private Date date;
-	private List<ProductAvailment> productAvailments;
+
+	private List<SessionProgramAvailment> programAvailments;
+	private List<SessionPackageAvailment> packageAvailments;
 
 	@NotNull(message = "Coach is required")
 	@ManyToOne(targetEntity = Coach.class)
@@ -43,14 +46,23 @@ public class Session extends Record {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	@OneToMany(targetEntity = ProductAvailment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "session", orphanRemoval = true)
-	public List<ProductAvailment> getProductAvailments() {
-		return productAvailments;
+	
+	@OneToMany(targetEntity = SessionProgramAvailment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "session", orphanRemoval = true)
+	public List<SessionProgramAvailment> getProgramAvailments() {
+		return programAvailments;
 	}
 
-	public void setProductAvailments(List<ProductAvailment> productAvailments) {
-		this.productAvailments = productAvailments;
+	public void setProgramAvailments(List<SessionProgramAvailment> programAvailments) {
+		this.programAvailments = programAvailments;
+	}
+
+	@OneToMany(targetEntity = SessionPackageAvailment.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "session", orphanRemoval = true)
+	public List<SessionPackageAvailment> getPackageAvailments() {
+		return packageAvailments;
+	}
+
+	public void setPackageAvailments(List<SessionPackageAvailment> packageAvailments) {
+		this.packageAvailments = packageAvailments;
 	}
 
 	@Override

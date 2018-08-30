@@ -1,4 +1,4 @@
-package core.model.product;
+package core.model.pkg;
 
 import java.util.List;
 
@@ -12,22 +12,22 @@ import core.repository.AbstractRepository;
 
 @Repository
 @Transactional
-public class ProgramRepository extends AbstractRepository<Program> {
+public class PackageRepository extends AbstractRepository<Package> {
 
 	@SuppressWarnings("unchecked")
-	public List<Program> findFilteredItems(String filter, Integer pageSize, Integer pageOffset, String orderBy) {
+	public List<Package> findFilteredItems(String filter, Integer pageSize, Integer pageOffset, String orderBy) {
 		Criteria criteria = getPagedItemsCriteria(pageSize, pageOffset, orderBy);
 
 		if (filter != null && !filter.isEmpty()) {
 			criteria.add(Restrictions.ilike("name", filter, MatchMode.START));
 		}
-		List<Program> list = criteria.list();
+		List<Package> list = criteria.list();
 		return list;
 	}
 
 	@Override
 	protected String getEntityName() {
-		return Program.ENTITY_NAME;
+		return Package.ENTITY_NAME;
 	}
 
 }
