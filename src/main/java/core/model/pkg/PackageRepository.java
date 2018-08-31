@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,14 @@ public class PackageRepository extends AbstractRepository<Package> {
 		}
 		List<Package> list = criteria.list();
 		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PackageAvailment> findMemberPackageAvailments(Long memberId) {
+		Criteria criteria = getSession().createCriteria(PackageAvailment.class);
+		criteria.add(Restrictions.eq("member.id", memberId));
+		criteria.addOrder(Order.desc("date"));
+		return criteria.list();
 	}
 
 	@Override
