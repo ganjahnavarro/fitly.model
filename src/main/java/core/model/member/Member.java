@@ -5,8 +5,11 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import core.enums.MemberType;
+import core.model.coach.Coach;
 import core.model.person.Person;
 
 @Entity(name = Member.ENTITY_NAME)
@@ -19,6 +22,8 @@ public class Member extends Person {
 
 	private BigDecimal height;
 	private BigDecimal width;
+
+	private Coach defaultCoach;
 
 	@Enumerated(EnumType.STRING)
 	public MemberType getType() {
@@ -43,6 +48,16 @@ public class Member extends Person {
 
 	public void setWidth(BigDecimal width) {
 		this.width = width;
+	}
+
+	@ManyToOne(targetEntity = Coach.class)
+	@JoinColumn(name = "defaultCoachId")
+	public Coach getDefaultCoach() {
+		return defaultCoach;
+	}
+
+	public void setDefaultCoach(Coach defaultCoach) {
+		this.defaultCoach = defaultCoach;
 	}
 
 }

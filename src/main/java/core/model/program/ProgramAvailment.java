@@ -7,14 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import core.enums.AvailmentType;
 import core.model.Record;
 import core.model.member.Member;
-import core.model.program.Program;
 
 @Entity(name = ProgramAvailment.ENTITY_NAME)
 public class ProgramAvailment extends Record {
@@ -24,13 +23,15 @@ public class ProgramAvailment extends Record {
 
 	private Member member;
 	private Program availedProgram;
-	private Date date;
+
+	private Date startDate;
+	private Date endDate;
 
 	private AvailmentType type;
 	private BigDecimal price;
 
 	@NotNull(message = "Member is required")
-	@OneToOne(targetEntity = Member.class)
+	@ManyToOne(targetEntity = Member.class)
 	@JoinColumn(name = "memberId")
 	public Member getMember() {
 		return member;
@@ -41,7 +42,7 @@ public class ProgramAvailment extends Record {
 	}
 
 	@NotNull(message = "Program is required")
-	@OneToOne(targetEntity = Program.class)
+	@ManyToOne(targetEntity = Program.class)
 	@JoinColumn(name = "programId")
 	public Program getAvailedProgram() {
 		return availedProgram;
@@ -51,13 +52,22 @@ public class ProgramAvailment extends Record {
 		this.availedProgram = availedProgram;
 	}
 
-	@NotNull(message = "Date is required")
-	public Date getDate() {
-		return date;
+	@NotNull(message = "Start date is required")
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@NotNull(message = "End date is required")
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	@Enumerated(EnumType.STRING)

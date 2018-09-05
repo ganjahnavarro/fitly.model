@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -31,7 +31,7 @@ public class PackageAvailment extends Record {
 	private BigDecimal price;
 
 	@NotNull(message = "Member is required")
-	@OneToOne(targetEntity = Member.class)
+	@ManyToOne(targetEntity = Member.class)
 	@JoinColumn(name = "memberId")
 	public Member getMember() {
 		return member;
@@ -42,7 +42,7 @@ public class PackageAvailment extends Record {
 	}
 
 	@NotNull(message = "Package is required")
-	@OneToOne(targetEntity = Package.class)
+	@ManyToOne(targetEntity = Package.class)
 	@JoinColumn(name = "packageId")
 	public Package getAvailedPackage() {
 		return availedPackage;

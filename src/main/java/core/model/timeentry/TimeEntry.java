@@ -1,15 +1,21 @@
-package core.model.pkg;
+package core.model.timeentry;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import core.model.Record;
 import core.model.coach.Coach;
 import core.model.member.Member;
+import core.model.pkg.PackageAvailment;
 import core.model.program.ProgramAvailment;
 
+@Entity(name = TimeEntry.ENTITY_NAME)
 public class TimeEntry extends Record {
 
 	private static final long serialVersionUID = -8623877750405224224L;
@@ -18,10 +24,10 @@ public class TimeEntry extends Record {
 	private Date date;
 	private Member member;
 	private Coach coachAssigned;
-	private BigDecimal commission;
 
-	private ProgramAvailment programaAvailment;
+	private ProgramAvailment programAvailment;
 	private PackageAvailment packageAvailment;
+	private BigDecimal commission;
 
 	public Date getDate() {
 		return date;
@@ -31,6 +37,9 @@ public class TimeEntry extends Record {
 		this.date = date;
 	}
 
+	@NotNull(message = "Member is required")
+	@ManyToOne(targetEntity = Member.class)
+	@JoinColumn(name = "memberId")
 	public Member getMember() {
 		return member;
 	}
@@ -39,6 +48,8 @@ public class TimeEntry extends Record {
 		this.member = member;
 	}
 
+	@ManyToOne(targetEntity = Coach.class)
+	@JoinColumn(name = "coachId")
 	public Coach getCoachAssigned() {
 		return coachAssigned;
 	}
@@ -55,14 +66,18 @@ public class TimeEntry extends Record {
 		this.commission = commission;
 	}
 
-	public ProgramAvailment getProgramaAvailment() {
-		return programaAvailment;
+	@ManyToOne(targetEntity = ProgramAvailment.class)
+	@JoinColumn(name = "programAvailmentId")
+	public ProgramAvailment getProgramAvailment() {
+		return programAvailment;
 	}
 
-	public void setProgramaAvailment(ProgramAvailment programaAvailment) {
-		this.programaAvailment = programaAvailment;
+	public void setProgramAvailment(ProgramAvailment programAvailment) {
+		this.programAvailment = programAvailment;
 	}
 
+	@ManyToOne(targetEntity = PackageAvailment.class)
+	@JoinColumn(name = "packageAvailmentId")
 	public PackageAvailment getPackageAvailment() {
 		return packageAvailment;
 	}

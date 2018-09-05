@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import core.enums.AvailmentType;
 import core.model.Record;
 
 @Entity(name = Program.ENTITY_NAME)
@@ -99,18 +98,6 @@ public class Program extends Record {
 	@Transient
 	public String getDisplayString() {
 		return getName();
-	}
-
-	@Transient
-	public BigDecimal getPrice(AvailmentType type) {
-		if (type == AvailmentType.REGULAR) {
-			return getMemberPrice();
-		} else if (type == AvailmentType.GUEST) {
-			return getGuestPrice();
-		} else if (type == AvailmentType.UNLIMITED) {
-			return getMonthlyPrice();
-		}
-		return null;
 	}
 
 }
