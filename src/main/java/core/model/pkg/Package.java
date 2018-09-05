@@ -21,12 +21,15 @@ public class Package extends Record {
 
 	private String name;
 	private String description;
-	
+
 	private Duration duration;
 	private Integer durationCount;
 	private Integer sessionsCount;
 	private BigDecimal price;
-	
+
+	private BigDecimal commission;
+	private Boolean active = true;
+
 	@NotBlank(message = "Name is required")
 	public String getName() {
 		return name;
@@ -80,7 +83,23 @@ public class Package extends Record {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	
+
+	public BigDecimal getCommission() {
+		return commission;
+	}
+
+	public void setCommission(BigDecimal commission) {
+		this.commission = commission;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	@Transient
 	public String getDisplayString() {

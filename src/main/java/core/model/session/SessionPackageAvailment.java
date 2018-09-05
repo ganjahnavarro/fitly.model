@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 
 import core.model.pkg.PackageAvailment;
 
+@Deprecated
 @Entity(name = SessionPackageAvailment.ENTITY_NAME)
 public class SessionPackageAvailment implements Serializable {
 

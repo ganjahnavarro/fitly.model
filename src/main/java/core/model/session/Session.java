@@ -16,6 +16,7 @@ import core.Utility;
 import core.model.Record;
 import core.model.coach.Coach;
 
+@Deprecated
 @Entity(name = Session.ENTITY_NAME)
 public class Session extends Record {
 

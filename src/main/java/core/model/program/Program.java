@@ -19,16 +19,15 @@ public class Program extends Record {
 
 	private String name;
 	private String description;
-	
+
 	private BigDecimal guestPrice;
 	private BigDecimal memberPrice;
 	private BigDecimal monthlyPrice;
-
-	private Boolean hasCoach = false;
 	private BigDecimal coachPrice;
 
+	private BigDecimal commission;
 	private Boolean active = true;
-	
+
 	@NotBlank(message = "Name is required")
 	public String getName() {
 		return name;
@@ -72,20 +71,20 @@ public class Program extends Record {
 		this.monthlyPrice = monthlyPrice;
 	}
 
-	public Boolean getHasCoach() {
-		return hasCoach;
-	}
-
-	public void setHasCoach(Boolean hasCoach) {
-		this.hasCoach = hasCoach;
-	}
-
 	public BigDecimal getCoachPrice() {
 		return coachPrice;
 	}
 
 	public void setCoachPrice(BigDecimal coachPrice) {
 		this.coachPrice = coachPrice;
+	}
+
+	public BigDecimal getCommission() {
+		return commission;
+	}
+
+	public void setCommission(BigDecimal commission) {
+		this.commission = commission;
 	}
 
 	public Boolean getActive() {
@@ -95,13 +94,13 @@ public class Program extends Record {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
-	
+
 	@Override
 	@Transient
 	public String getDisplayString() {
 		return getName();
 	}
-	
+
 	@Transient
 	public BigDecimal getPrice(AvailmentType type) {
 		if (type == AvailmentType.REGULAR) {

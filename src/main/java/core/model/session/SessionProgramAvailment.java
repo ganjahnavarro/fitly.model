@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 
 import core.model.program.ProgramAvailment;
 
+@Deprecated
 @Entity(name = SessionProgramAvailment.ENTITY_NAME)
 public class SessionProgramAvailment implements Serializable {
 
