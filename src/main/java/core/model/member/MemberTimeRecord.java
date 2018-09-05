@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 import core.model.Record;
 
+@Deprecated
 @Entity(name = MemberTimeRecord.ENTITY_NAME)
 public class MemberTimeRecord extends Record {
 
