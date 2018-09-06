@@ -30,6 +30,14 @@ public class MemberRepository extends AbstractRepository<Member> {
 		return list;
 	}
 	
+	public Member findByAccessCardNo(String accessCardNo) {
+		Criteria criteria = getSession().createCriteria(Membership.class);
+		criteria.add(Restrictions.eq("accessCardNo", accessCardNo));
+		Membership membership = (Membership) criteria.uniqueResult();
+		
+		return membership != null ? membership.getMember() : null;
+	}
+	
 	public Membership findMembershipByMemberId(Long memberId) {
 		Criteria criteria = getSession().createCriteria(Membership.class);
 		criteria.add(Restrictions.eq("member.id", memberId));

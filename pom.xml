@@ -9,6 +9,9 @@
 		<springframework.version>4.2.4.RELEASE</springframework.version>
 		<hibernate.version>4.3.6.Final</hibernate.version>
 		<core.version>0.0.1</core.version>
+		
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 
 	<dependencies>

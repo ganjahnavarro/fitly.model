@@ -1,5 +1,6 @@
 package core.model.program;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -16,9 +17,23 @@ public class ProgramAvailmentRepository extends AbstractRepository<ProgramAvailm
 
 	@SuppressWarnings("unchecked")
 	public List<ProgramAvailment> findMemberProgramAvailments(Long memberId) {
-		Criteria criteria = getSession().createCriteria(ProgramAvailment.class);
+		Criteria criteria = getDefaultCriteria();
 		criteria.add(Restrictions.eq("member.id", memberId));
-		criteria.addOrder(Order.desc("date"));
+		criteria.addOrder(Order.desc("startDate"));
+		return criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProgramAvailment> findAvailableProgramAvailments(Long memberId, Date date) {
+		Criteria criteria = getDefaultCriteria();
+		
+		criteria.add(Restrictions.eq("member.id", memberId));
+		criteria.add(Restrictions.le("startDate", date));
+		criteria.add(Restrictions.ge("endDate", date));
+
+		criteria.addOrder(Order.asc("startDate"));
+		criteria.addOrder(Order.asc("id"));
+		
 		return criteria.list();
 	}
 

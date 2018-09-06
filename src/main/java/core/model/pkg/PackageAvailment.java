@@ -2,12 +2,16 @@ package core.model.pkg;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -18,17 +22,24 @@ import core.model.member.Member;
 @Entity(name = PackageAvailment.ENTITY_NAME)
 public class PackageAvailment extends Record {
 
-	private static final long serialVersionUID = -2333037781334637804L;
+	private static final long serialVersionUID = 1572673504970827214L;
 	public static final String ENTITY_NAME = "packageAvailment";
 
 	private Member member;
 	private Package availedPackage;
-	private Date date;
+
+	private Date startDate;
+	private Date endDate;
 
 	private Duration duration;
 	private Integer durationCount;
+	
 	private Integer sessionsCount;
+	private Integer sessionsRemaining;
+	
 	private BigDecimal price;
+	
+	private Set<PackageAvailmentSession> sessions;
 
 	@NotNull(message = "Member is required")
 	@ManyToOne(targetEntity = Member.class)
@@ -51,14 +62,22 @@ public class PackageAvailment extends Record {
 	public void setAvailedPackage(Package availedPackage) {
 		this.availedPackage = availedPackage;
 	}
-	
-	@NotNull(message = "Date is required")
-	public Date getDate() {
-		return date;
+
+	@NotNull(message = "Start date is required")
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	@Enumerated(EnumType.STRING)
@@ -88,7 +107,15 @@ public class PackageAvailment extends Record {
 	public void setSessionsCount(Integer sessionsCount) {
 		this.sessionsCount = sessionsCount;
 	}
+	
+	public Integer getSessionsRemaining() {
+		return sessionsRemaining;
+	}
 
+	public void setSessionsRemaining(Integer sessionsRemaining) {
+		this.sessionsRemaining = sessionsRemaining;
+	}
+	
 	@NotNull(message = "Price is required")
 	public BigDecimal getPrice() {
 		return price;
@@ -96,6 +123,15 @@ public class PackageAvailment extends Record {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	
+	@OneToMany(targetEntity = PackageAvailmentSession.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "packageAvailment", orphanRemoval = true)
+	public Set<PackageAvailmentSession> getSessions() {
+		return sessions;
+	}
+
+	public void setSessions(Set<PackageAvailmentSession> sessions) {
+		this.sessions = sessions;
 	}
 
 	@Override

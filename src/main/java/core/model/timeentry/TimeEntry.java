@@ -22,11 +22,14 @@ public class TimeEntry extends Record {
 	public static final String ENTITY_NAME = "timeentry";
 
 	private Date date;
+
 	private Member member;
-	private Coach coachAssigned;
+	private String accessCardNoUsed;
 
 	private ProgramAvailment programAvailment;
 	private PackageAvailment packageAvailment;
+
+	private Coach coachAssigned;
 	private BigDecimal commission;
 
 	public Date getDate() {
@@ -46,6 +49,14 @@ public class TimeEntry extends Record {
 
 	public void setMember(Member member) {
 		this.member = member;
+	}
+
+	public String getAccessCardNoUsed() {
+		return accessCardNoUsed;
+	}
+
+	public void setAccessCardNoUsed(String accessCardNoUsed) {
+		this.accessCardNoUsed = accessCardNoUsed;
 	}
 
 	@ManyToOne(targetEntity = Coach.class)
