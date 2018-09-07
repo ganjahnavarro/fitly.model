@@ -43,7 +43,7 @@ public class PackageAvailmentRepository extends AbstractRepository<PackageAvailm
 		
 		// Filter by remaining sessions count
 		return packageAvailments.stream()
-			.filter(item -> item.getSessionsCount() >= item.getSessionsRemaining())
+			.filter(item -> item.getSessionsRemaining() > 0)
 			.collect(Collectors.toList());
 		
 	}
