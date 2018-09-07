@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -46,6 +47,19 @@ public class PackageAvailmentRepository extends AbstractRepository<PackageAvailm
 			.filter(item -> item.getSessionsRemaining() > 0)
 			.collect(Collectors.toList());
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PackagePurchaseSummary> findPackagePurchaseSummaries() {
+		String queryString = "select "
+				+ "new " + PackagePurchaseSummary.class.getName()
+				+ "(o.availedPackage, count(o.id)) from "
+				+ PackageAvailment.ENTITY_NAME + " o "
+				+ "group by o.availedPackage "
+				+ "order by count(o.id) desc";
+	
+		Query query = getSession().createQuery(queryString);
+		return query.list();
 	}
 
 	@Override

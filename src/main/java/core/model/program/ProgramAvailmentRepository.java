@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -35,6 +36,19 @@ public class ProgramAvailmentRepository extends AbstractRepository<ProgramAvailm
 		criteria.addOrder(Order.asc("id"));
 		
 		return criteria.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProgramPurchaseSummary> findProgramPurchaseSummaries() {
+		String queryString = "select "
+				+ "new " + ProgramPurchaseSummary.class.getName()
+				+ "(o.availedProgram, count(o.id)) from "
+				+ ProgramAvailment.ENTITY_NAME + " o "
+				+ "group by o.availedProgram "
+				+ "order by count(o.id) desc";
+	
+		Query query = getSession().createQuery(queryString);
+		return query.list();
 	}
 
 	@Override
