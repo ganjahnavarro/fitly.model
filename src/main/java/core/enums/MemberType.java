@@ -8,7 +8,7 @@ public enum MemberType {
 		try {
 			return MemberType.valueOf(type);
 		} catch(Exception e) {
-			return REGULAR;
+			return null;
 		}
 	}
 

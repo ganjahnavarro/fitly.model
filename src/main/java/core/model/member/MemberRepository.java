@@ -1,8 +1,10 @@
 package core.model.member;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import core.enums.MemberType;
+import core.report.SalesReport;
 import core.repository.AbstractRepository;
 
 @Repository
@@ -34,9 +37,10 @@ public class MemberRepository extends AbstractRepository<Member> {
 		if (filter != null && !filter.isEmpty()) {
 			criteria.add(Restrictions.ilike("firstName", filter, MatchMode.START));
 		}
-
-		type = type == null ? MemberType.REGULAR : type;
-		criteria.add(Restrictions.eq("type", type));
+		
+		if (type != null) {
+			criteria.add(Restrictions.eq("type", type));
+		}
 
 		List<Member> list = criteria.list();
 		return list;
@@ -63,7 +67,36 @@ public class MemberRepository extends AbstractRepository<Member> {
 		criteria.addOrder(Order.desc("modifiedDate"));
 		return criteria.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SalesReport> findSalesReport(Date startDate, Date endDate) {
+		String queryString = "select "
+				+ "new " + SalesReport.class.getName()
+				+ "(o.startDate, o.member, 'Membership', o.amount) from "
+				+ Membership.ENTITY_NAME + " o where o.deleted = false";
+		
+		if (startDate != null) {
+			queryString += " and o.date >= :startDate";
+		}
+		
+		if (endDate != null) {
+			queryString += " and o.date <= :endDate";
+		}
 
+		queryString += " order by o.startDate";
+		Query query = getSession().createQuery(queryString);
+		
+		if (startDate != null) {
+			query.setParameter("startDate", startDate);
+		}
+		
+		if (endDate != null) {
+			query.setParameter("endDate", endDate);
+		}
+
+		return query.list();
+	}
+	
 	@Override
 	protected String getEntityName() {
 		return Member.ENTITY_NAME;

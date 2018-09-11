@@ -1,4 +1,6 @@
-package core.model.program;
+package core.report;
+
+import core.model.program.Program;
 
 public class ProgramPurchaseSummary {
 

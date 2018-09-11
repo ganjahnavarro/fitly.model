@@ -1,4 +1,6 @@
-package core.model.pkg;
+package core.report;
+
+import core.model.pkg.Package;
 
 public class PackagePurchaseSummary {
 

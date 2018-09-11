@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import core.report.ProgramPurchaseSummary;
 import core.repository.AbstractRepository;
 
 @Repository

@@ -1,8 +1,9 @@
 package core.model.pkg;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,7 +40,7 @@ public class PackageAvailment extends Record {
 	
 	private BigDecimal price;
 	
-	private Set<PackageAvailmentSession> sessions;
+	private List<PackageAvailmentSession> sessions = new ArrayList<>();
 
 	@NotNull(message = "Member is required")
 	@ManyToOne(targetEntity = Member.class)
@@ -126,11 +127,11 @@ public class PackageAvailment extends Record {
 	}
 	
 	@OneToMany(targetEntity = PackageAvailmentSession.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "packageAvailment", orphanRemoval = true)
-	public Set<PackageAvailmentSession> getSessions() {
+	public List<PackageAvailmentSession> getSessions() {
 		return sessions;
 	}
 
-	public void setSessions(Set<PackageAvailmentSession> sessions) {
+	public void setSessions(List<PackageAvailmentSession> sessions) {
 		this.sessions = sessions;
 	}
 

@@ -5,17 +5,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import core.report.PackagePurchaseSummary;
 import core.repository.AbstractRepository;
 
 @Repository
 @Transactional
 public class PackageAvailmentRepository extends AbstractRepository<PackageAvailment> {
+	
+	public PackageAvailment findByIdWithDetails(Long id) {
+		PackageAvailment packageAvailment = (PackageAvailment) getSession().get(PackageAvailment.class, id);
+		Hibernate.initialize(packageAvailment.getSessions());
+		return packageAvailment;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<PackageAvailment> findMemberPackageAvailments(Long memberId) {
@@ -61,7 +69,7 @@ public class PackageAvailmentRepository extends AbstractRepository<PackageAvailm
 		Query query = getSession().createQuery(queryString);
 		return query.list();
 	}
-
+	
 	@Override
 	protected String getEntityName() {
 		return Package.ENTITY_NAME;
