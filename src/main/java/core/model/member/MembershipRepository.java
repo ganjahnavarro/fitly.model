@@ -36,9 +36,10 @@ public class MembershipRepository extends AbstractRepository<Membership> {
 	public List<SalesReport> findSalesReport(Date startDate, Date endDate) {
 		String queryString = "select "
 				+ "new " + SalesReport.class.getName()
-				+ "(o.startDate, o.member, 'Memberships', o.amount) from "
-				+ Membership.ENTITY_NAME + " o where o.deleted = false";
-		
+				+ "(o.startDate, o.member, 'Memberships', o.amount - coalesce(o.discountAmount, 0)) from "
+				+ Membership.ENTITY_NAME + " o where o.deleted = false"
+				+ " and o.member.deleted = false";
+
 		if (startDate != null) {
 			queryString += " and o.startDate >= :startDate";
 		}
