@@ -17,10 +17,11 @@ import core.repository.AbstractRepository;
 @Transactional
 public class MembershipRepository extends AbstractRepository<Membership> {
 	
-	public Membership findMembershipByMemberId(Long memberId) {
+	@SuppressWarnings("unchecked")
+	public List<Membership> findMembershipsByMemberId(Long memberId) {
 		Criteria criteria = getSession().createCriteria(Membership.class);
 		criteria.add(Restrictions.eq("member.id", memberId));
-		return (Membership) criteria.uniqueResult();
+		return criteria.list();
 	}
 	
 	@SuppressWarnings("unchecked")

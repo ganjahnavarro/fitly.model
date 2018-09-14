@@ -5,12 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import core.Utility;
 import core.model.Record;
+import core.model.promo.Promo;
 
 @Entity(name = Membership.ENTITY_NAME)
 public class Membership extends Record {
@@ -25,9 +26,12 @@ public class Membership extends Record {
 
 	private String accessCardNo;
 	private BigDecimal amount;
+	
+	private Promo promo;
+	private BigDecimal discountAmount;
 
 	@NotNull(message = "Member is required")
-	@OneToOne(targetEntity = Member.class)
+	@ManyToOne(targetEntity = Member.class)
 	@JoinColumn(name = "memberId")
 	public Member getMember() {
 		return member;
@@ -70,6 +74,29 @@ public class Membership extends Record {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+	
+	@ManyToOne(targetEntity = Promo.class)
+	@JoinColumn(name = "promoId")
+	public Promo getPromo() {
+		return promo;
+	}
+
+	public void setPromo(Promo promo) {
+		this.promo = promo;
+	}
+
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+	
+	@Transient
+	public BigDecimal getDiscountedAmount() {
+		return getDiscountAmount() != null ? getAmount().subtract(getDiscountAmount()) : getAmount();
 	}
 
 	@Override

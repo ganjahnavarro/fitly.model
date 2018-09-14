@@ -16,7 +16,7 @@ public class Promo extends Record {
 
 	private String code;
 	private String description;
-	private BigDecimal lessAmount;
+	private BigDecimal discountAmount;
 
 	@NotNull(message = "Code is required")
 	public String getCode() {
@@ -35,13 +35,13 @@ public class Promo extends Record {
 		this.description = description;
 	}
 
-	@NotNull(message = "Less amount is required")
-	public BigDecimal getLessAmount() {
-		return lessAmount;
+	@NotNull(message = "Discount amount is required")
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
 	}
 
-	public void setLessAmount(BigDecimal lessAmount) {
-		this.lessAmount = lessAmount;
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
 	}
 
 	@Override
