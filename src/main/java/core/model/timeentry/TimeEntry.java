@@ -13,6 +13,7 @@ import core.model.Record;
 import core.model.coach.Coach;
 import core.model.member.Member;
 import core.model.pkg.PackageAvailment;
+import core.model.pkg.PackageAvailmentSession;
 import core.model.program.ProgramAvailment;
 
 @Entity(name = TimeEntry.ENTITY_NAME)
@@ -27,7 +28,9 @@ public class TimeEntry extends Record {
 	private String accessCardNoUsed;
 
 	private ProgramAvailment programAvailment;
+
 	private PackageAvailment packageAvailment;
+	private PackageAvailmentSession session;
 
 	private Coach coachAssigned;
 	private BigDecimal commission;
@@ -95,6 +98,16 @@ public class TimeEntry extends Record {
 
 	public void setPackageAvailment(PackageAvailment packageAvailment) {
 		this.packageAvailment = packageAvailment;
+	}
+	
+	@ManyToOne(targetEntity = PackageAvailmentSession.class)
+	@JoinColumn(name = "sessionId")
+	public PackageAvailmentSession getSession() {
+		return session;
+	}
+
+	public void setSession(PackageAvailmentSession session) {
+		this.session = session;
 	}
 
 	@Override
