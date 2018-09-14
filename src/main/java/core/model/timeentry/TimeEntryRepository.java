@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import core.model.coach.CoachEnrollees;
 import core.report.SalesReport;
 import core.repository.AbstractRepository;
 
@@ -56,6 +57,36 @@ public class TimeEntryRepository extends AbstractRepository<TimeEntry> {
 		}
 
 		queryString += " order by o.date";
+		Query query = getSession().createQuery(queryString);
+		
+		if (startDate != null) {
+			query.setParameter("startDate", startDate);
+		}
+		
+		if (endDate != null) {
+			query.setParameter("endDate", endDate);
+		}
+
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CoachEnrollees> findCoachEnrollees(Date startDate, Date endDate) {
+		String queryString = "select "
+				+ "new " + CoachEnrollees.class.getName()
+				+ "(o.coachAssigned, count(o.id)) from "
+				+ TimeEntry.ENTITY_NAME + " o where o.deleted = false"
+				+ " and o.coachAssigned is not null";
+		
+		if (startDate != null) {
+			queryString += " and o.date >= :startDate";
+		}
+		
+		if (endDate != null) {
+			queryString += " and o.date <= :endDate";
+		}
+
+		queryString += " group by o.coachAssigned order by count(o.id) desc";
 		Query query = getSession().createQuery(queryString);
 		
 		if (startDate != null) {
