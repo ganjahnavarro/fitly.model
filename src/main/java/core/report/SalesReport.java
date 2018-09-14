@@ -8,13 +8,13 @@ import core.model.person.Person;
 public class SalesReport {
 
 	private Date date;
-	private Person person;
+	private String person;
 	private String description;
 	private BigDecimal amount;
 
 	public SalesReport(Date date, Person person, String description, BigDecimal amount) {
 		this.date = date;
-		this.person = person;
+		this.person = person != null ? person.getDisplayString() : null;
 		this.description = description;
 		this.amount = amount;
 	}
@@ -27,11 +27,11 @@ public class SalesReport {
 		this.date = date;
 	}
 
-	public Person getPerson() {
+	public String getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(String person) {
 		this.person = person;
 	}
 

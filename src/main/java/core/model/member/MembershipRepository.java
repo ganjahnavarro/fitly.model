@@ -36,15 +36,15 @@ public class MembershipRepository extends AbstractRepository<Membership> {
 	public List<SalesReport> findSalesReport(Date startDate, Date endDate) {
 		String queryString = "select "
 				+ "new " + SalesReport.class.getName()
-				+ "(o.startDate, o.member, 'Membership', o.amount) from "
+				+ "(o.startDate, o.member, 'Memberships', o.amount) from "
 				+ Membership.ENTITY_NAME + " o where o.deleted = false";
 		
 		if (startDate != null) {
-			queryString += " and o.date >= :startDate";
+			queryString += " and o.startDate >= :startDate";
 		}
 		
 		if (endDate != null) {
-			queryString += " and o.date <= :endDate";
+			queryString += " and o.startDate <= :endDate";
 		}
 
 		queryString += " order by o.startDate";

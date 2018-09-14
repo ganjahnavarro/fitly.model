@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import core.report.PackagePurchaseSummary;
+import core.report.SalesReport;
 import core.repository.AbstractRepository;
 
 @Repository
@@ -67,6 +68,35 @@ public class PackageAvailmentRepository extends AbstractRepository<PackageAvailm
 				+ "order by count(o.id) desc";
 	
 		Query query = getSession().createQuery(queryString);
+		return query.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SalesReport> findSalesReport(Date startDate, Date endDate) {
+		String queryString = "select "
+				+ "new " + SalesReport.class.getName()
+				+ "(o.startDate, o.member, 'Package Availments', o.price) from "
+				+ PackageAvailment.ENTITY_NAME + " o where o.deleted = false";
+		
+		if (startDate != null) {
+			queryString += " and o.startDate >= :startDate";
+		}
+		
+		if (endDate != null) {
+			queryString += " and o.startDate <= :endDate";
+		}
+
+		queryString += " order by o.startDate";
+		Query query = getSession().createQuery(queryString);
+		
+		if (startDate != null) {
+			query.setParameter("startDate", startDate);
+		}
+		
+		if (endDate != null) {
+			query.setParameter("endDate", endDate);
+		}
+
 		return query.list();
 	}
 	
