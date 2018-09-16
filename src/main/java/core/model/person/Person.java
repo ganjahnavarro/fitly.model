@@ -8,9 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import core.enums.Gender;
@@ -20,21 +20,21 @@ import core.model.Record;
 public abstract class Person extends Record {
 
 	private static final long serialVersionUID = -8375457349889809821L;
-	
+
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	
+
 	private Gender gender = Gender.MALE;
 
 	private Date birthDate;
 	private String address;
 	private String contactNo;
 	private String email;
-	
+
 	private byte[] image;
 	private String imageFileName;
-	
+
 	@NotEmpty(message = "First name is required")
 	public String getFirstName() {
 		return firstName;
@@ -113,7 +113,7 @@ public abstract class Person extends Record {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public String getContactNo() {
 		return contactNo;
 	}
