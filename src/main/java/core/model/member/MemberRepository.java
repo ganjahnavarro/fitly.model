@@ -1,5 +1,6 @@
 package core.model.member;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -8,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import core.Utility;
 import core.enums.MemberType;
 import core.repository.AbstractRepository;
 
@@ -16,12 +18,22 @@ import core.repository.AbstractRepository;
 public class MemberRepository extends AbstractRepository<Member> {
 	
 	@SuppressWarnings("unchecked")
-	public Long findCount(MemberType type) {
+	public Long findCount(MemberType type, Date startDate, Date endDate) {
 		Criteria criteria = getDefaultCriteria();
 
 		type = type == null ? MemberType.REGULAR : type;
 		criteria.add(Restrictions.eq("type", type));
-
+		
+		if (startDate != null) {
+			startDate = Utility.removeDateTime(startDate);
+			criteria.add(Restrictions.ge("createdDate", startDate));
+		}
+		
+		if (endDate != null) {
+			endDate = Utility.getTomorrowWithoutDateTime(endDate);
+			criteria.add(Restrictions.le("createdDate", endDate));
+		}
+		
 		List<Member> list = criteria.list();
 		return list != null ? Long.valueOf(list.size()) : 0;
 	}

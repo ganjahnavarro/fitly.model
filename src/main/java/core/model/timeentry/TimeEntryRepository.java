@@ -18,7 +18,7 @@ import core.repository.AbstractRepository;
 public class TimeEntryRepository extends AbstractRepository<TimeEntry> {
 
 	@SuppressWarnings("unchecked")
-	public List<TimeEntry> findFilteredItems(Long memberId, Long coachId,
+	public List<TimeEntry> findFilteredItems(Long memberId, Long coachId, Date startDate, Date endDate,
 			Integer pageSize, Integer pageOffset, String orderBy) {
 		Criteria criteria = getPagedItemsCriteria(pageSize, pageOffset, orderBy);
 		
@@ -28,6 +28,14 @@ public class TimeEntryRepository extends AbstractRepository<TimeEntry> {
 		
 		if (coachId != null) {
 			criteria.add(Restrictions.eq("coachAssigned.id", coachId));
+		}
+		
+		if (startDate != null) {
+			criteria.add(Restrictions.ge("date", startDate));
+		}
+		
+		if (endDate != null) {
+			criteria.add(Restrictions.le("date", endDate));
 		}
 		
 		return criteria.list();
